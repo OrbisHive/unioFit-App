@@ -1,0 +1,89 @@
+---
+alwaysApply: true
+description: Flutter Clean Architecture + Riverpod project rules - permanent guidelines for all development
+---
+
+# Flutter Clean Architecture + Riverpod Project Rules
+
+## Project Configuration
+- **Flutter SDK:** 3.41.3
+- **State Management:** ONLY Riverpod 2.x with riverpod_annotation + riverpod_generator
+- **Navigation:** go_router (latest) for scalability
+- **Architecture:** Uncle Bob's Clean Architecture
+
+## Architecture Structure (STRICT)
+
+```
+lib/
+├── core/                  ← shared only
+│   ├── constants/
+│   ├── di/
+│   ├── error/
+│   ├── extensions/
+│   ├── resources/
+│   ├── router/
+│   ├── theme/
+│   └── utils/
+└── features/
+    └── {feature_name}/    ← every screen/feature here
+        ├── data/
+        │   ├── datasources/   ← mock for now
+        │   ├── models/
+        │   └── repositories/  ← impl
+        ├── domain/
+        │   ├── entities/
+        │   ├── repositories/  ← abstract only
+        │   └── usecases/      ← one file per use case
+        └── presentation/
+            ├── providers/     ← Riverpod (notifiers, providers)
+            ├── screens/
+            └── widgets/
+```
+
+## Critical Rules
+
+1. **State Management:** NEVER use setState, Provider, Bloc, etc. ONLY Riverpod with riverpod_annotation + riverpod_generator.
+
+2. **Colors:** NEVER hard-code any color. Always use `R.appColors.*` (NOT `AppColors.*`). Import from [lib/core/resources/resources.dart](mdc:lib/core/resources/resources.dart). When updating colors, only modify app_colors.dart.
+
+3. **Text Styles:** NEVER hard-code TextStyle. Always use `R.textStyles.poppins()`, `R.textStyles.roboto()`, etc. from [lib/core/resources/app_text_style.dart](mdc:lib/core/resources/app_text_style.dart).
+
+4. **Spacing (Heights/Widths):** NEVER use hardcoded `SizedBox(height: 24)` or `SizedBox(width: 16)`. Always use constants from [lib/core/constants/heights_widths.dart](mdc:lib/core/constants/heights_widths.dart) like `h1`, `h2`, `h3`, `w1`, `w2`, etc. These use sizer for responsive sizing.
+
+5. **Padding/EdgeInsets:** Use constants from heights_widths.dart or create appropriate spacing using the h/w constants.
+
+6. **Navigation:** Use go_router for all navigation. Routes defined in [lib/core/router/app_router.dart](mdc:lib/core/router/app_router.dart).
+
+7. **Repositories:** All repositories in data/ must use mock/in-memory data initially. When integrating API, replace ONLY the datasource with real HTTP (dio/http will be added later).
+
+8. **Code Style:** Clean, well-commented, fully testable, highly modular and expandable. Use freezed when models become complex. Always separate concerns strictly (no business logic in presentation).
+
+9. **Use Cases:** When use-case documents are attached, map them exactly to domain/usecases and presentation/providers.
+
+## Development Workflow
+
+- **"Implement feature X"** or attach use-case documents → Create the full Clean Architecture layers for that feature only (domain first → data mock → presentation with Riverpod providers).
+
+- **"Integrate API for feature Y"** → Only modify the data/datasources and repositories (keep everything else untouched).
+
+- **"Update colors"** → Only change [lib/core/resources/app_colors.dart](mdc:lib/core/resources/app_colors.dart) and rebuild.
+
+## Theme & Resources
+
+- Theme configuration: [lib/core/theme/app_theme.dart](mdc:lib/core/theme/app_theme.dart)
+- Color definitions: [lib/core/resources/app_colors.dart](mdc:lib/core/resources/app_colors.dart) - Use `R.appColors.*` (NOT `AppColors.*`)
+- Text styles: [lib/core/resources/app_text_style.dart](mdc:lib/core/resources/app_text_style.dart) - Use `R.textStyles.*` (NOT hardcoded `TextStyle`)
+- Decorations: [lib/core/resources/app_decorations.dart](mdc:lib/core/resources/app_decorations.dart) - Use `R.appDecorations.*`
+- Validators: [lib/core/resources/app_validator.dart](mdc:lib/core/resources/app_validator.dart) - Use `R.appValidator.*`
+- Heights & Widths: [lib/core/constants/heights_widths.dart](mdc:lib/core/constants/heights_widths.dart) - Use `h1`, `h2`, `w1`, `w2`, etc. (NOT hardcoded `SizedBox(height: 24)`)
+- App strings: Use localization with `.L()` extension - `"key".L()` (NOT hardcoded strings)
+- Service locator: [lib/core/di/service_locator.dart](mdc:lib/core/di/service_locator.dart)
+
+## Dependencies
+
+- flutter_riverpod: ^3.2.1
+- riverpod_annotation: ^4.0.2
+- riverpod_generator: ^4.0.3
+- go_router: ^17.1.0
+- build_runner: ^2.4.11
+- dependency_overrides: analyzer: ^9.0.0
