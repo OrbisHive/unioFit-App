@@ -76,7 +76,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             left: 0,
             right: 0,
             height: 60.h,
-            child: Image.asset(R.appImages.loginBg, fit: BoxFit.cover),
+            child: Image.asset(R.appImages.otpBG, fit: BoxFit.cover),
           ),
 
           // Back Button
