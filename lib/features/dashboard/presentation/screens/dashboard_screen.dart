@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
-
 /// Dashboard screen (placeholder).
 /// Will be fully implemented in future user stories.
 class DashboardScreen extends StatelessWidget {
   static String route = '/dashboard';
   const DashboardScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

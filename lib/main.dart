@@ -8,7 +8,6 @@ import 'core/theme/app_theme.dart';
 import 'core/resources/localization/localization_map.dart';
 import 'core/utils/media_query_utils.dart';
 import 'features/auth/presentation/screens/splash_screen.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
