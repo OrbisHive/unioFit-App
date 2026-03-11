@@ -11,7 +11,6 @@ import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/utils/app_button.dart';
 import 'otp_verification_screen.dart';
-
 class RegistrationScreen extends StatefulWidget {
   static String route = '/registration';
   final String? preFilledPhoneNumber;

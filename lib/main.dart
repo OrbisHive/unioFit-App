@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system, // Follows system theme
           // initialRoute: SplashScreen.route,
-          initialRoute: DashboardScreen.route,
+          initialRoute: SplashScreen.route,
           getPages: AppRoutes.pages,
           unknownRoute: GetPage(
             name: '/not-found',

@@ -8,8 +8,6 @@ class AppImages {
   final String gymReward = "assets/images/gymReward.png";
   final String loginBg = "assets/images/loginBg.png";
   final String accountCreatedImage = "assets/images/accountCreatedImg.png";
-
-  final String loginBg = "assets/images/loginBG.png";
   final String login = "assets/images/login.png";
   final String otpBG = "assets/images/otpBG.png";
 
