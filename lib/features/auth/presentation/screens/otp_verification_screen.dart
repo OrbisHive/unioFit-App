@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unio_fit/features/auth/presentation/screens/registration_screen.dart';
 
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/app_validator.dart';
@@ -14,6 +15,7 @@ import '../../../../core/resources/resources.dart';
 import '../../../../core/utils/ZBotToast.dart';
 import '../../../../core/utils/app_button.dart';
 import '../../../../core/utils/back_button_widget.dart';
+import '../../../../core/utils/congratulation_view.dart';
 import '../../../../core/utils/safe_area_widget.dart';
 
 /// Screen for OTP verification.
@@ -266,6 +268,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     FocusScope.of(context).unfocus();
 
     if (_formOTPKey.currentState?.validate() ?? false) {
+      Get.off(
+            () => CongratulationView(
+          image: R.appImages.accountCreatedImage,
+          title: 'account_created',
+          subtitle: 'account_created_success',
+          buttonTitle: 'home',
+          onPressed: () =>
+              Get.offAllNamed(RegistrationScreen.route),
+              // Get.offAllNamed(CompleteProfileBaseView.route),
+        ),
+      );
     }
   }
 

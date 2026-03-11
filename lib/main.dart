@@ -8,6 +8,7 @@ import 'core/theme/app_theme.dart';
 import 'core/resources/localization/localization_map.dart';
 import 'core/utils/media_query_utils.dart';
 import 'features/auth/presentation/screens/splash_screen.dart';
+import 'features/base_view/presentation/screens/dashboard_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -21,6 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Sizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
@@ -39,7 +42,8 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system, // Follows system theme
-          initialRoute: SplashScreen.route,
+          // initialRoute: SplashScreen.route,
+          initialRoute: DashboardScreen.route,
           getPages: AppRoutes.pages,
           unknownRoute: GetPage(
             name: '/not-found',

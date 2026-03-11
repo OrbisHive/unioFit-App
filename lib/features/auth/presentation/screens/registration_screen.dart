@@ -135,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: 60.h,
+                height: 50.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 6.w,
                   vertical: 4.h,

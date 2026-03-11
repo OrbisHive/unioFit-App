@@ -7,6 +7,8 @@ class AppImages {
   final String gymCompetition = "assets/images/gymCompetition.png";
   final String gymReward = "assets/images/gymReward.png";
   final String loginBg = "assets/images/loginBg.png";
+  final String accountCreatedImage = "assets/images/accountCreatedImg.png";
+
 
 
 }

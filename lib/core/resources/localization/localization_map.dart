@@ -113,9 +113,53 @@ class LocalizationMap {
     "clean_architecture_ready": "Clean Architecture + Riverpod Ready",
     "pre_filled_phone": "Pre-filled phone:",
     "this_screen_will_be_implemented": "This screen will be implemented in future user stories.",
-    "dashboard_screen_text": "Dashboard Screen",
+    "dashboard_screen_text": "Dashboard",
     "route_not_found": "Route not found:",
-
+    "home":"Home",
+    
+    // Dashboard
+    "quick_stats": "Quick Stats",
+    "recent_activities": "Recent Activities",
+    "view_all": "View All",
+    "quick_actions": "Quick Actions",
+    "total_workouts": "Total Workouts",
+    "active_plans": "Active Plans",
+    "calories_burned": "Calories Burned",
+    "streak_days": "Streak Days",
+    "start_workout": "Start Workout",
+    "view_programs": "View Programs",
+    "track_progress": "Track Progress",
+    
+    // Competition
+    "active_competition": "Active Competition",
+    "upcoming_competition": "Upcoming Competition",
+    "upcoming": "Upcoming",
+    "participants": "Participants",
+    "prize": "Prize",
+    "join_competition": "Join Competition",
+    "no_competitions_available": "No Competitions Available",
+    "no_competitions_description": "Check back later for new competitions and challenges!",
+    "starts_in": "Starts in",
+    "empty_state": "Empty State",
+    
+    // Competition Announcement
+    "announcement": "Announcement",
+    "announcements": "Announcements",
+    "new_competitions_launching_soon": "New competitions launching soon.",
+    "stay_tuned": "Stay tuned!",
+    
+    // Dashboard Stats
+    "total_winners": "Total Winners",
+    "total_cash_distributed": "Total Cash Distributed",
+    
+    // Competition
+    "enroll_now": "Enroll Now",
+    
+    // Empty Dashboard State
+    "no_competition_right_now": "No competition right now — but keep checking!",
+    "we_are_planning_something_big": "We're planning something big.",
+    "browse_gyms_around_you": "In the meantime, browse gyms around you.",
+    "find_gyms": "Find Gyms",
   };
 
   static String getValues(String key) {

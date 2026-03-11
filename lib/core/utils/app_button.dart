@@ -80,7 +80,7 @@ class _AppButtonState extends State<AppButton> {
             Text(
               widget.isLocalizedText ? widget.title.L() : widget.title,
               style: R.textStyles.poppins(
-                // color: widget.textColor ?? R.appColors.white,
+                color: widget.textColor ?? R.appColors.white,
                 fontSize: widget.textSize ?? 14.px,
                 fontWeight: FontWeight.w500,
               ),
