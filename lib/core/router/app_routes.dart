@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/base_view.dart';
 import '../../features/auth/presentation/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/screens/registration_screen.dart';
 import '../../features/auth/presentation/screens/splash_screen.dart';
@@ -42,6 +43,11 @@ abstract class AppRoutes {
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
+      name: BaseView.route,
+      page: () => const BaseView(),
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),GetPage(
       name: DashboardScreen.route,
       page: () => const DashboardScreen(),
       transition: Transition.fadeIn,

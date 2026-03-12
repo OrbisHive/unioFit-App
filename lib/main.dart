@@ -8,6 +8,7 @@ import 'core/theme/app_theme.dart';
 import 'core/resources/localization/localization_map.dart';
 import 'core/utils/media_query_utils.dart';
 import 'features/auth/presentation/screens/splash_screen.dart';
+import 'features/base_view/presentation/screens/base_view.dart';
 import 'features/base_view/presentation/screens/dashboard_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system, // Follows system theme
           // initialRoute: SplashScreen.route,
-          initialRoute: SplashScreen.route,
+          initialRoute: BaseView.route,
           getPages: AppRoutes.pages,
           unknownRoute: GetPage(
             name: '/not-found',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/localization/localization_map.dart';
@@ -15,7 +16,12 @@ import 'widgets/empty_dashboard_state.dart';
 /// Frontend only implementation with mock/static data
 class DashboardScreen extends StatefulWidget {
   static String route = '/dashboard';
-  const DashboardScreen({super.key});
+  final ZoomDrawerController? drawerController;
+
+  const DashboardScreen({
+    super.key,
+    this.drawerController,
+  });
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -81,6 +87,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: CustomAppBar(
         title: "dashboard_screen_text".L(),
         showBackButton: false,
+        showMenuIcon: widget.drawerController != null,
+        onMenuPressed: () {
+          widget.drawerController?.toggle?.call();
+        },
       ),
       body: SafeArea(
         child: SingleChildScrollView(

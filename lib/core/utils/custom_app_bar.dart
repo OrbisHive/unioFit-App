@@ -16,6 +16,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double? elevation;
   final bool centerTitle;
   final PreferredSizeWidget? bottom;
+  final VoidCallback? onMenuPressed;
+  final bool showMenuIcon;
 
   const CustomAppBar({
     super.key,
@@ -29,6 +31,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.elevation,
     this.centerTitle = false,
     this.bottom,
+    this.onMenuPressed,
+    this.showMenuIcon = false,
   });
 
   @override
@@ -43,12 +47,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       centerTitle: centerTitle,
       leading: leading ??
-          (showBackButton
+          (showMenuIcon
               ? Padding(
                   padding: EdgeInsets.only(left: 4.w),
-                  child: BackButtonWidget(onTap: onBackPressed),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: isDark
+                          ? R.appColors.darkTextPrimary
+                          : R.appColors.textPrimary,
+                    ),
+                    onPressed: onMenuPressed ?? () {},
+                  ),
                 )
-              : null),
+              : (showBackButton
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 4.w),
+                      child: BackButtonWidget(onTap: onBackPressed),
+                    )
+                  : null)),
       title: title != null
           ? Text(
               title!,
