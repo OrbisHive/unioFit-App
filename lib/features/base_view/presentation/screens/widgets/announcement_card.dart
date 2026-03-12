@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../../core/constants/heights_widths.dart';
 import '../../../../../core/resources/localization/localization_map.dart';
 import '../../../../../core/resources/resources.dart';
+import 'competition_type_tag.dart';
 import 'dashboard_widget_helpers.dart';
 
 /// Announcement Card Widget
@@ -32,16 +33,23 @@ class AnnouncementCard extends StatelessWidget {
               DashboardWidgetHelpers.emojiIcon(
                 emoji: "📢",
                 backgroundColor: R.appColors.primary,
-                size: 18,
+                size: 14,
               ),
               w1,
-              DashboardWidgetHelpers.styledText(
-                text: "announcement".L(),
-                isDark: isDark,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
-                isPrimary: true,
+              Expanded(
+                child: DashboardWidgetHelpers.styledText(
+                  text: "announcement".L(),
+                  isDark: isDark,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w700,
+                  isPrimary: true,
+                ),
               ),
+              // Competition Type Tag (top-right) - only show if competitionType exists
+              if (announcement["competitionType"] != null)
+                CompetitionTypeTag(
+                  type: announcement["competitionType"] as String,
+                ),
             ],
           ),
           SizedBox(height: 12.px),

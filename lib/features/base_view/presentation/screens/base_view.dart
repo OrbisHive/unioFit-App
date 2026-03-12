@@ -40,6 +40,8 @@ class _BaseViewState extends State<BaseView> {
     return WillPopScope(
       onWillPop: Helper.onWillPop,
       child: ZoomDrawer(
+        menuScreenTapClose: true,
+        mainScreenTapClose: true,
         controller: _drawerController,
         borderRadius: 24,
         style: DrawerStyle.style3,

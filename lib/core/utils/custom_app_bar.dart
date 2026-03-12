@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading ??
           (showMenuIcon
               ? Padding(
-                  padding: EdgeInsets.only(left: 4.w),
+                  padding: EdgeInsets.only(left: 4.w,),
                   child: IconButton(
                     icon: Icon(
                       Icons.menu,
@@ -62,7 +62,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 )
               : (showBackButton
                   ? Padding(
-                      padding: EdgeInsets.only(left: 4.w),
+                      padding: EdgeInsets.only(left: 4.w,top: 1.h,bottom: 1.h),
                       child: BackButtonWidget(onTap: onBackPressed),
                     )
                   : null)),
@@ -70,7 +70,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? Text(
               title!,
               style: R.textStyles.poppins(
-                fontSize: 20,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: isDark ? R.appColors.darkTextPrimary : R.appColors.textPrimary,
                 letterSpacing: 0.15,

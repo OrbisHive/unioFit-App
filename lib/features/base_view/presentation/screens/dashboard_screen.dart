@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/utils/custom_app_bar.dart';
+import 'active_competitions_view_all_screen.dart';
+import 'announcements_view_all_screen.dart';
+import 'upcoming_competitions_view_all_screen.dart';
 import 'widgets/dashboard_header.dart';
 import 'widgets/dashboard_stats.dart';
 import 'widgets/active_competition_card.dart';
@@ -38,16 +42,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
       "title": "30 Day Fat Loss Challenge",
       "prize": "Rs 12,500",
       "participants": 248,
+      "competitionType": "ONLINE",
     },
     {
       "title": "Muscle Builder Challenge",
       "prize": "Rs 8,000",
       "participants": 180,
+      "competitionType": "OFFLINE",
     },
     {
       "title": "Cardio Endurance Challenge",
       "prize": "Rs 10,000",
       "participants": 320,
+      "competitionType": "ONLINE",
     },
   ];
 
@@ -55,23 +62,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
     {
       "title": "Summer Shred Challenge",
       "startsIn": "5 days",
+      "competitionType": "ONLINE",
     },
     {
       "title": "Winter Bulk Challenge",
       "startsIn": "12 days",
+      "competitionType": "OFFLINE",
     },
     {
       "title": "New Year Transformation",
       "startsIn": "20 days",
+      "competitionType": "ONLINE",
     },
   ];
 
   final List<Map<String, dynamic>> announcements = [
     {
       "title": "New competitions launching soon",
+      "competitionType": "ONLINE",
     },
     {
       "title": "Major prizes coming next month",
+      "competitionType": "OFFLINE",
     },
     {
       "title": "Special event announcement",
@@ -107,9 +119,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               h4,
               // DashboardStats
               DashboardStats(isDark: isDark),
-              h4,
+              h3,
               // Active Competitions Section
-              _buildSectionHeading("active_competition".L(), isDark),
+              _buildSectionHeading(
+                "active_competition".L(),
+                isDark,
+                () => Get.toNamed(ActiveCompetitionsViewAllScreen.route),
+              ),
               h2,
               _buildHorizontalScrollSection(
                 context: context,
@@ -119,9 +135,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   isDark: isDark,
                 ),
               ),
-              h4,
+              h3,
               // Upcoming Competitions Section
-              _buildSectionHeading("upcoming_competition".L(), isDark),
+              _buildSectionHeading(
+                "upcoming_competition".L(),
+                isDark,
+                () => Get.toNamed(UpcomingCompetitionsViewAllScreen.route),
+              ),
               h2,
               _buildHorizontalScrollSection(
                 context: context,
@@ -131,9 +151,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   isDark: isDark,
                 ),
               ),
-              h4,
+              h3,
               // Announcements Section
-              _buildSectionHeading("announcements".L(), isDark),
+              _buildSectionHeading(
+                "announcements".L(),
+                isDark,
+                () => Get.toNamed(AnnouncementsViewAllScreen.route),
+              ),
               h2,
               _buildHorizontalScrollSection(
                 context: context,
@@ -151,15 +175,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  /// Builds a section heading widget
-  Widget _buildSectionHeading(String title, bool isDark) {
-    return Text(
-      title,
-      style: R.textStyles.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: isDark ? R.appColors.darkTextPrimary : R.appColors.textPrimary,
-      ),
+  /// Builds a section heading widget with "View All" button
+  Widget _buildSectionHeading(String title, bool isDark, VoidCallback? onViewAll) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: R.textStyles.poppins(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: isDark ? R.appColors.darkTextPrimary : R.appColors.textPrimary,
+          ),
+        ),
+        if (onViewAll != null)
+          GestureDetector(
+            onTap: onViewAll,
+            child: Text(
+              "view_all".L(),
+              style: R.textStyles.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: R.appColors.primary,
+              ),
+            ),
+          ),
+      ],
     );
   }
 

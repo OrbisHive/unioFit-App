@@ -21,7 +21,12 @@ class AppDecorations {
     Color? hintColor,
   }) {
     return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 16 , vertical: verticalPadding ?? 14),
+      // contentPadding: EdgeInsets.symmetric(
+      //   horizontal: prefixIcon != null
+      //       ? (horizontalPadding ?? 16)
+      //       : (horizontalPadding ?? 16),
+      //   vertical: verticalPadding ?? 14,
+      // ),
       fillColor: filledColor ?? R.appColors.surfaceVariant,
       filled: true,
       border: OutlineInputBorder(
@@ -62,11 +67,22 @@ class AppDecorations {
       ),
       errorMaxLines: 2,
       suffixIcon: suffixIcon,
-      prefixIcon: Padding(
-        padding: const EdgeInsets.only(left:10),
-        child: prefixIcon,
+      prefixIcon: prefixIcon != null
+          ? Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: prefixIcon,
+            )
+          : null,
+      prefixIconConstraints: prefixIcon != null
+          ? BoxConstraints(
+              maxWidth: prefixIconConstraints ?? 50,
+              minWidth: prefixIconConstraints ?? 50,
+            )
+          : null,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: prefixIcon != null ? 16 : (horizontalPadding ?? 16),
+        vertical: verticalPadding ?? 14,
       ),
-        prefixIconConstraints: BoxConstraints(maxWidth:prefixIconConstraints?? 10,minWidth: prefixIconConstraints??10),
       hintText: isLocalized ? hintText.L() : hintText,
       isDense: true,
       errorStyle: R.textStyles.poppins(

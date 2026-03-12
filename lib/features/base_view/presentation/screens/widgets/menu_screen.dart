@@ -175,6 +175,7 @@ class MenuScreen extends StatelessWidget {
                     ),
                     child: _buildMenuItem(
                       context: context,
+                      showIcon: false,
                       icon: Icons.logout_outlined,
                       title: "Logout",
                       isDark: isDark,
@@ -208,7 +209,7 @@ class MenuScreen extends StatelessWidget {
     required VoidCallback onTap,
     Color? iconColor,
     Color? textColor,
-    bool? showIcon,
+    bool? showIcon=true,
   }) {
     final defaultIconColor = iconColor ??
         (isDark ? R.appColors.darkTextPrimary : R.appColors.textPrimary);
@@ -238,7 +239,7 @@ class MenuScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(
+           if(showIcon==true) Icon(
               Icons.chevron_right,
               color: isDark
                   ? R.appColors.darkTextSecondary

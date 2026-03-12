@@ -5,7 +5,11 @@ import '../../features/auth/presentation/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/screens/registration_screen.dart';
 import '../../features/auth/presentation/screens/splash_screen.dart';
 import '../../features/auth/presentation/screens/terms_and_privacy_view.dart';
+import '../../features/base_view/presentation/screens/active_competitions_view_all_screen.dart';
+import '../../features/base_view/presentation/screens/announcements_view_all_screen.dart';
+import '../../features/base_view/presentation/screens/competition_details_screen.dart';
 import '../../features/base_view/presentation/screens/dashboard_screen.dart';
+import '../../features/base_view/presentation/screens/upcoming_competitions_view_all_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 
@@ -63,6 +67,30 @@ abstract class AppRoutes {
       name: TermsAndPolicyView.route,
       page: () => const TermsAndPolicyView(),
       transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: ActiveCompetitionsViewAllScreen.route,
+      page: () => const ActiveCompetitionsViewAllScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: UpcomingCompetitionsViewAllScreen.route,
+      page: () => const UpcomingCompetitionsViewAllScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: AnnouncementsViewAllScreen.route,
+      page: () => const AnnouncementsViewAllScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: CompetitionDetailsScreen.route,
+      page: () => const CompetitionDetailsScreen(),
+      transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
     ),
   ];
