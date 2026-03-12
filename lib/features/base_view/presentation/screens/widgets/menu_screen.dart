@@ -8,7 +8,6 @@ import '../../../../../core/constants/heights_widths.dart';
 import '../../../../../core/resources/localization/localization_map.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../profile_view.dart';
-
 /// Menu Screen Widget for Navigation Drawer
 /// Displays menu items following app theme
 class MenuScreen extends StatelessWidget {

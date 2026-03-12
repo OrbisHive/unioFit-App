@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/privacy_policy.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/terms_conditions_view.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/support_chat_screen.dart';
 import '../../../../core/resources/resources.dart';
 
 class HelpSupportScreen extends StatefulWidget {
@@ -9,21 +14,22 @@ class HelpSupportScreen extends StatefulWidget {
 }
 
 class _HelpSupportScreenState extends State<HelpSupportScreen> {
+
   late final List<Map<String, String>> faqs = [
     {
       "question": "How can I find nearby gyms?",
       "answer":
-      "Go to the Gym Locator section and enable location access. The app will automatically show gyms near you along with distance and ratings."
+      "Go to the Gym Locator section and enable location access. The app will automatically show gyms near you along with distance and ratings.",
     },
     {
       "question": "How do I view details about a gym?",
       "answer":
-      "Tap on any gym in the list to open its detail page. You can see photos, address, opening hours, ratings, and reviews."
+      "Tap on any gym in the list to open its detail page. You can see photos, address, opening hours, ratings, and reviews.",
     },
     {
       "question": "Can I save a gym for later?",
       "answer":
-      "Yes. Tap the heart icon on any gym detail page to save it to your favorites. You can access all saved gyms from your Profile section."
+      "Yes. Tap the heart icon on any gym detail page to save it to your favorites. You can access all saved gyms from your Profile section.",
     },
   ];
 
@@ -31,101 +37,131 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Help & Support"),
+        title: Text(
+          "Help & Support",
+          style: R.textStyles.poppins(
+            fontSize: 18.sp,
+            color: isDark ? R.appColors.white : R.appColors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
+
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(4.w),
         children: [
-          /// FAQs Title
+
+          /// FAQs
           Text(
             "FAQs",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: R.textStyles.poppins(
+              fontSize: 16.5.sp,
+              fontWeight: FontWeight.w600,
+              color: isDark ? R.appColors.white : R.appColors.black,
+            ),
           ),
-          SizedBox(height: 10),
 
-          /// FAQ List
+          SizedBox(height: 2.h),
+
           ListView.builder(
             itemCount: faqs.length,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.only(top: 10),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
+
               final faq = faqs[index];
               final isExpanded = expandedIndex == index;
 
               return Container(
-                margin: const EdgeInsets.only(bottom: 12),
+                margin: EdgeInsets.only(bottom: 1.h),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  color: isDark ? R.appColors.darkSurface : Colors.white,
+                  borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 4,
+                      color: isDark
+                          ? Colors.white10
+                          : Colors.black.withOpacity(0.05),
+                      blurRadius: 6,
+                      spreadRadius: 1,
                       offset: const Offset(0, 2),
-                    )
+                    ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    /// Question
+
                     InkWell(
-                      borderRadius: BorderRadius.circular(10),
                       onTap: () {
                         setState(() {
                           expandedIndex = isExpanded ? null : index;
                         });
                       },
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: isExpanded ? R.appColors.primary : Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 4.w,
+                          vertical: 2.h,
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 17),
+                        decoration: BoxDecoration(
+                          color: isExpanded
+                              ? R.appColors.primary
+                              : (isDark
+                              ? R.appColors.darkSurface
+                              : Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+
                             Expanded(
                               child: Text(
                                 faq["question"]!,
                                 style: R.textStyles.poppins(
-                                  color: isExpanded
-                                      ? Colors.white
-                                      : R.appColors.black,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                                  color: isExpanded
+                                      ? R.appColors.white
+                                      : (isDark
+                                      ? R.appColors.white
+                                      : R.appColors.black),
                                 ),
                               ),
                             ),
+
                             Icon(
                               isExpanded ? Icons.remove : Icons.add,
-                              color: isExpanded ? Colors.white : Colors.black54,
+                              color: isExpanded
+                                  ? R.appColors.white
+                                  : (isDark
+                                  ? R.appColors.white
+                                  : Colors.black54),
                             ),
+
                           ],
                         ),
                       ),
                     ),
 
-                    /// Answer
                     if (isExpanded)
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.vertical(
-                              bottom: Radius.circular(10)),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 4.w,
+                          vertical: 2.h,
                         ),
                         child: Text(
                           faq["answer"]!,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black87,
-                            height: 1.5,
+                          style: R.textStyles.poppins(
+                            fontSize: 15.sp,
+                            color: isDark
+                                ? R.appColors.white
+                                : R.appColors.black.withOpacity(0.8),
                           ),
                         ),
                       ),
@@ -135,33 +171,49 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
             },
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: 2.h),
 
           /// Support Section
           Text(
             "Support",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: R.textStyles.poppins(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+              color: isDark ? R.appColors.white : R.appColors.black,
+            ),
           ),
-          SizedBox(height: 10),
-          _tile("Contact Support", Icons.support_agent),
-          _tile("Report an Issue", Icons.report_problem),
 
-          SizedBox(height: 20),
+          SizedBox(height: 1.h),
+
+          _tile("Contact Support", Icons.support_agent, isDark),
+          _tile("Report an Issue", Icons.report_problem, isDark),
+
+          SizedBox(height: 2.h),
 
           /// Legal Section
-          Text("Legal",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
-          _tile("Terms & Conditions", Icons.description),
-          _tile("Privacy Policy", Icons.lock),
+          Text(
+            "Legal",
+            style: R.textStyles.poppins(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+              color: isDark ? R.appColors.white : R.appColors.black,
+            ),
+          ),
 
-          SizedBox(height: 30),
+          SizedBox(height: 1.h),
 
-          /// Footer Version
+          _tile("Terms & Conditions", Icons.description, isDark),
+          _tile("Privacy Policy", Icons.lock, isDark),
+
+          SizedBox(height: 3.h),
+
           Center(
             child: Text(
               "App Version 1.0.0",
-              style: TextStyle(color: Colors.grey),
+              style: R.textStyles.poppins(
+                color: isDark ? R.appColors.white : Colors.grey.shade600,
+                fontSize: 15.sp,
+              ),
             ),
           ),
         ],
@@ -169,13 +221,44 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
     );
   }
 
-  /// Reusable Tile Widget
-  Widget _tile(String title, IconData icon) {
+  Widget _tile(String title, IconData icon, bool isDark) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios, size: 18),
-      onTap: () {},
+      leading: Icon(
+        icon,
+        color: isDark ? R.appColors.white : R.appColors.primary,
+      ),
+      title: Text(
+        title,
+        style: R.textStyles.poppins(
+          fontSize: 15.5.sp,
+          fontWeight: FontWeight.w500,
+          color: isDark ? R.appColors.white : R.appColors.primary,
+        ),
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        size: 16,
+        color: isDark ? R.appColors.white : Colors.grey,
+      ),
+      onTap: () {
+
+        if (title == "Contact Support") {
+          Get.to(() => const SupportChatScreen());
+        }
+
+        else if (title == "Report an Issue") {
+          Get.to(() => const SupportChatScreen());
+        }
+
+        else if (title == "Privacy Policy") {
+          Get.to(() => const PrivacyPolicyScreen());
+        }
+
+        else if (title == "Terms & Conditions") {
+          Get.to(() => const TermsAndConditionsScreen());
+        }
+
+      },
     );
   }
 }
