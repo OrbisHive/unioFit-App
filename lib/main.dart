@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
+          darkTheme: AppTheme.lightTheme,
           themeMode: ThemeMode.system, // Follows system theme
           // initialRoute: SplashScreen.route,
           initialRoute: BaseView.route,

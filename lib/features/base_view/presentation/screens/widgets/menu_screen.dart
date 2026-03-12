@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/help_Support_view.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/setting_view.dart';
 import '../../../../../core/constants/heights_widths.dart';
 import '../../../../../core/resources/localization/localization_map.dart';
 import '../../../../../core/resources/resources.dart';
+import '../../profile_view.dart';
 
 /// Menu Screen Widget for Navigation Drawer
 /// Displays menu items following app theme
@@ -112,8 +115,9 @@ class MenuScreen extends StatelessWidget {
                     title: "Profile",
                     isDark: isDark,
                     onTap: () {
-                      drawerController?.close?.call();
-                      // Navigation will be implemented later
+                      // drawerController?.close?.call();
+                      navigate(context, const ProfileScreen());
+
                     },
                   ),
                   h2,
@@ -145,8 +149,8 @@ class MenuScreen extends StatelessWidget {
                     title: "Settings",
                     isDark: isDark,
                     onTap: () {
-                      drawerController?.close?.call();
-                      // Navigation will be implemented later
+                      // drawerController?.close?.call();
+                      navigate(context, const SettingsScreen());
                     },
                   ),
                   h2,
@@ -156,8 +160,9 @@ class MenuScreen extends StatelessWidget {
                     title: "Help & Support",
                     isDark: isDark,
                     onTap: () {
-                      drawerController?.close?.call();
-                      // Navigation will be implemented later
+                      // drawerController?.close?.call();
+                      navigate(context, const HelpSupportScreen());
+                      //
                     },
                   ),
                   h4,
@@ -189,7 +194,12 @@ class MenuScreen extends StatelessWidget {
       ),
     );
   }
-
+  void navigate(BuildContext context, Widget page) {
+    drawerController?.close?.call();
+    Future.delayed(const Duration(milliseconds: 250), () {
+      Get.to(() => page);
+    });
+  }
   Widget _buildMenuItem({
     required BuildContext context,
     required IconData icon,

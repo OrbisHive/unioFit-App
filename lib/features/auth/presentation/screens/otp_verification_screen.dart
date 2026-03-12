@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:unio_fit/features/auth/presentation/screens/registration_screen.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/dashboard_screen.dart';
 
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/app_validator.dart';
@@ -266,7 +267,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Future<void> _onVerifyOTP() async {
     FocusScope.of(context).unfocus();
-
     if (_formOTPKey.currentState?.validate() ?? false) {
       Get.off(
             () => CongratulationView(
@@ -275,7 +275,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           subtitle: 'account_created_success',
           buttonTitle: 'home',
           onPressed: () =>
-              Get.offAllNamed(RegistrationScreen.route),
+              Get.offAllNamed(DashboardScreen.route),
               // Get.offAllNamed(CompleteProfileBaseView.route),
         ),
       );
