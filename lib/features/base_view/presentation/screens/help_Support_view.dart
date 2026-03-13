@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:unio_fit/features/base_view/presentation/screens/privacy_policy.dart';
 import 'package:unio_fit/features/base_view/presentation/screens/terms_conditions_view.dart';
 import 'package:unio_fit/features/base_view/presentation/screens/support_chat_screen.dart';
+import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
 
 class HelpSupportScreen extends StatefulWidget {
@@ -16,21 +17,9 @@ class HelpSupportScreen extends StatefulWidget {
 class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
   late final List<Map<String, String>> faqs = [
-    {
-      "question": "How can I find nearby gyms?",
-      "answer":
-      "Go to the Gym Locator section and enable location access. The app will automatically show gyms near you along with distance and ratings.",
-    },
-    {
-      "question": "How do I view details about a gym?",
-      "answer":
-      "Tap on any gym in the list to open its detail page. You can see photos, address, opening hours, ratings, and reviews.",
-    },
-    {
-      "question": "Can I save a gym for later?",
-      "answer":
-      "Yes. Tap the heart icon on any gym detail page to save it to your favorites. You can access all saved gyms from your Profile section.",
-    },
+    {"question": "faq1_question", "answer": "faq1_answer"},
+    {"question": "faq2_question", "answer": "faq2_answer"},
+    {"question": "faq3_question", "answer": "faq3_answer"},
   ];
 
   int? expandedIndex;
@@ -43,7 +32,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Help & Support",
+          "help_and_support".L(),
           style: R.textStyles.poppins(
             fontSize: 18.sp,
             color: isDark ? R.appColors.white : R.appColors.black,
@@ -58,7 +47,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
           /// FAQs
           Text(
-            "FAQs",
+            "faqs".L(),
             style: R.textStyles.poppins(
               fontSize: 16.5.sp,
               fontWeight: FontWeight.w600,
@@ -121,7 +110,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
                             Expanded(
                               child: Text(
-                                faq["question"]!,
+                                faq["question"]!.L(),
                                 style: R.textStyles.poppins(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
@@ -156,7 +145,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
                           vertical: 2.h,
                         ),
                         child: Text(
-                          faq["answer"]!,
+                          faq["answer"]!.L(),
                           style: R.textStyles.poppins(
                             fontSize: 15.sp,
                             color: isDark
@@ -175,7 +164,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
           /// Support Section
           Text(
-            "Support",
+            "support".L(),
             style: R.textStyles.poppins(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -185,14 +174,14 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
           SizedBox(height: 1.h),
 
-          _tile("Contact Support", Icons.support_agent, isDark),
-          _tile("Report an Issue", Icons.report_problem, isDark),
+          _tile("contact_support", Icons.support_agent, isDark),
+          _tile("report_an_issue", Icons.report_problem, isDark),
 
           SizedBox(height: 2.h),
 
           /// Legal Section
           Text(
-            "Legal",
+            "legal".L(),
             style: R.textStyles.poppins(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -202,14 +191,14 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
 
           SizedBox(height: 1.h),
 
-          _tile("Terms & Conditions", Icons.description, isDark),
-          _tile("Privacy Policy", Icons.lock, isDark),
+          _tile("terms_and_conditions", Icons.description, isDark),
+          _tile("privacy_policy", Icons.lock, isDark),
 
           SizedBox(height: 3.h),
 
           Center(
             child: Text(
-              "App Version 1.0.0",
+              "app_version".L(),
               style: R.textStyles.poppins(
                 color: isDark ? R.appColors.white : Colors.grey.shade600,
                 fontSize: 15.sp,
@@ -221,14 +210,14 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
     );
   }
 
-  Widget _tile(String title, IconData icon, bool isDark) {
+  Widget _tile(String key, IconData icon, bool isDark) {
     return ListTile(
       leading: Icon(
         icon,
         color: isDark ? R.appColors.white : R.appColors.primary,
       ),
       title: Text(
-        title,
+        key.L(),
         style: R.textStyles.poppins(
           fontSize: 15.5.sp,
           fontWeight: FontWeight.w500,
@@ -241,23 +230,13 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
         color: isDark ? R.appColors.white : Colors.grey,
       ),
       onTap: () {
-
-        if (title == "Contact Support") {
+        if (key == "contact_support" || key == "report_an_issue") {
           Get.to(() => const SupportChatScreen());
-        }
-
-        else if (title == "Report an Issue") {
-          Get.to(() => const SupportChatScreen());
-        }
-
-        else if (title == "Privacy Policy") {
+        } else if (key == "privacy_policy") {
           Get.to(() => const PrivacyPolicyScreen());
-        }
-
-        else if (title == "Terms & Conditions") {
+        } else if (key == "terms_and_conditions") {
           Get.to(() => const TermsAndConditionsScreen());
         }
-
       },
     );
   }

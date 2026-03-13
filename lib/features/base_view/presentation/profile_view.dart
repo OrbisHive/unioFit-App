@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unio_fit/core/resources/localization/localization_map.dart';
+import 'package:unio_fit/core/utils/custom_app_bar.dart';
 import '../../../core/resources/resources.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
   @override
@@ -8,7 +11,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   String name = "Saqib Riaz";
   String phone = "+92 3324654652";
 
@@ -21,22 +23,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title:  Text("Edit Name",style: R.textStyles.poppins(fontSize: 16.sp,fontWeight: FontWeight.w600),),
+          title: Text(
+            "Edit_Name".L(),
+            style: R.textStyles.poppins(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           content: TextField(
             controller: nameController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                ),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
 
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                ),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
 
               focusedBorder: OutlineInputBorder(
@@ -46,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 1.5,
                 ),
               ),
-              hintText: "Enter your name",
+              hintText: "Enter_your_name".L(),
             ),
           ),
           actions: [
@@ -54,7 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child:  Text("Cancel",style: R.textStyles.poppins(fontSize: 15.sp,fontWeight: FontWeight.w600)),
+              child: Text(
+                "Cancel_lbl".L(),
+                style: R.textStyles.poppins(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -63,7 +73,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 });
                 Navigator.pop(context);
               },
-              child:  Text("Save",style: R.textStyles.poppins(fontSize: 15.sp,fontWeight: FontWeight.w600,color: Colors.white)),
+              child: Text(
+                "Save_lbl".L(),
+                style: R.textStyles.poppins(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         );
@@ -74,13 +91,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Profile"),
-      ),
+      appBar: CustomAppBar(title: "my_profile".L()),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-
           Row(
             children: [
               const CircleAvatar(
@@ -94,41 +108,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     name,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  Text(
-                    phone,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
+                  Text(phone, style: const TextStyle(color: Colors.grey)),
                 ],
-              )
+              ),
             ],
           ),
 
           const SizedBox(height: 20),
 
-          _tile(
-            "Edit Name",
-            Icons.edit,
-            onTap: editNamePopup,
-          ),
+          _tile("Edit_Name".L(), Icons.edit, onTap: editNamePopup),
 
           const Divider(),
 
-          _sectionTitle("Account"),
+          _sectionTitle("Account_lbl".L()),
 
-          _tile("Saved Gyms", Icons.favorite),
+          _tile("Saved_Gyms".L(), Icons.favorite),
 
-          _tile("My Prizes", Icons.card_giftcard),
+          _tile("My_Prizes".L(), Icons.card_giftcard),
 
           const Divider(),
 
-          _tile(
-            "Logout",
-            Icons.logout,
-            isRed: true,
-            onTap: showLogoutDialog,
-          ),
+          _tile("Logout_lbl".L(), Icons.logout, isRed: true, onTap: showLogoutDialog),
         ],
       ),
     );
@@ -139,24 +143,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(
         title,
-        style: const TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  Widget _tile(String title, IconData icon,
-      {bool isRed = false, VoidCallback? onTap}) {
+  Widget _tile(
+    String title,
+    IconData icon, {
+    bool isRed = false,
+    VoidCallback? onTap,
+  }) {
     return ListTile(
       leading: Icon(icon, color: isRed ? Colors.red : null),
-      title: Text(
-        title,
-        style: TextStyle(color: isRed ? Colors.red : null),
-      ),
+      title: Text(title, style: TextStyle(color: isRed ? Colors.red : null)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 18),
       onTap: onTap,
     );
   }
+
   void showLogoutDialog() {
     showDialog(
       context: context,
@@ -166,35 +171,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderRadius: BorderRadius.circular(12),
           ),
           title: Row(
-            children: const [
+            children:  [
               Icon(Icons.logout, color: Colors.red),
               SizedBox(width: 8),
-              Text("Logout"),
+              Text("logout_lbl".L()),
             ],
           ),
-          content: const Text(
-            "Are you sure you want to logout from your account?",
+          content:  Text(
+            "want_to_logout_from_your_account?".L(),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Cancel"),
+              child:  Text("Cancel_lbl".L()),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-              ),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
                 Navigator.pop(context);
 
                 // Logout logic here
                 // Navigator.pushReplacement(context,
                 // MaterialPageRoute(builder: (_) => LoginScreen()));
-
               },
-              child: const Text("Logout"),
+              child:  Text("Logout_lbl".L()),
             ),
           ],
         );

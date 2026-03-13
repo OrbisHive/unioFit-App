@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unio_fit/core/resources/localization/localization_map.dart';
 import 'package:unio_fit/features/auth/presentation/screens/registration_screen.dart';
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/resources.dart';
@@ -16,22 +17,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<OnboardingPage> _pages = [
     OnboardingPage(
-      title: "Discover Gyms Near You",
-      subtitle: "Find the best gyms with ratings, photos & directions",
+      title: "Discover_Gyms_Near_You".L(),
+      subtitle: "Find_the_best_gyms_with_ratings_photos_directions".L(),
       backgroundImage: R.appImages.descoverGym,
     ),
     OnboardingPage(
-      title: "Join Exciting Competitions",
-      subtitle: "Challenge yourself and win real cash or prizes",
+      title: "Join_Exciting_Competitions".L(),
+      subtitle: "Challenge_yourself_and_win_real_cash_or_prizes".L(),
       backgroundImage: R.appImages.gymCompetition,
     ),
     OnboardingPage(
-      title: "Track Your Wins & Rewards",
-      subtitle: "See winners, claim prizes, and stay motivated",
+      title: "Track_Your_Wins_Rewards".L(),
+      subtitle: "See_winners_claim_prizes_and_stay_motivated".L(),
       backgroundImage: R.appImages.gymReward,
     ),
   ];
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -66,7 +66,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -120,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Expanded(
                             child: AppButton(
                               onPressed: _skip,
-                              title: "Skip",
+                              title: "skip_lbl".L(),
                               isLocalizedText: false,
                               backgroundColor: Colors.transparent,
                               textColor: Colors.black,
@@ -133,8 +132,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             child: AppButton(
                               onPressed: _nextPage,
                               title: _currentPage == _pages.length - 1
-                                  ? "Get Started"
-                                  : "Next",
+                                  ? "Get_Started_lbl".L()
+                                  : "Next_lbl".L(),
                               isLocalizedText: false,
                               textSize: 16,
                               textColor: Colors.black,
@@ -204,7 +203,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
 class OnboardingPage {
   final String title;
   final String subtitle;

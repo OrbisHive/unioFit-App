@@ -64,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       h2,
                       Text(
-                        "Enter your full name and phone number to create your profile",
+                        "Enter_your_full_name_and_phone_number".L(),
                         style: R.textStyles.poppins(
                           fontSize: 14,
                           color: Colors.white70,
@@ -115,7 +115,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return TextFormField(
       controller: _nameController,
       decoration: R.appDecorations.inputDecorationWithHint(
-        hintText: "Full Name",
+        hintText: "Full_Name_lbl".L(),
         hintTextStyle: R.textStyles.poppins(
             fontSize: 14.sp, color: R.appColors.greyColor),
         isLocalized: false,
@@ -147,7 +147,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       keyboardAction: TextInputAction.next,
       inputDecoration: R.appDecorations
           .inputDecorationWithHint(
-        hintText: "Phone Number",
+        hintText: "Phone_Number_lbl".L(),
         isLocalized: false,
         hintTextStyle: R.textStyles.poppins(
             fontSize: 14.sp, color: R.appColors.greyColor),
@@ -258,7 +258,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void _validateAndContinue() {
     if (!_formKey.currentState!.validate()) return;
     if (!_isAgreed) {
-      Get.snackbar("Error", "Please accept terms and conditions");
+      Get.snackbar("Error-lbl".L(), "Please_accept_terms_and_conditions".L());
       return;
     }
     Get.toNamed(OtpVerificationScreen.route);
@@ -266,11 +266,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void _onTapTermsService() {
     Get.toNamed(TermsAndPolicyView.route,
-        arguments: {"title": 'terms_and_condition'});
+        arguments: {"title_lbl".L(): 'terms_and_condition'});
   }
 
   void _onTapPrivacyPolicy() {
     Get.toNamed(TermsAndPolicyView.route,
-        arguments: {"title": 'privacy_policy'});
+        arguments: {"title_lbl": 'privacy_policy'});
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unio_fit/features/base_view/presentation/screens/notification%20screen.dart';
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
@@ -20,10 +21,7 @@ import 'widgets/empty_dashboard_state.dart';
 class DashboardScreen extends StatefulWidget {
   static String route = '/dashboard';
   final ZoomDrawerController? drawerController;
-  const DashboardScreen({
-    super.key,
-    this.drawerController,
-  });
+  const DashboardScreen({super.key, this.drawerController});
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
@@ -31,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // Mock data - will be replaced with real data later
   final String _userName = "Umair";
   final String _userGreeting = "Good Morning";
-  
+
   // Mock lists for horizontal scrolling
   final List<Map<String, dynamic>> activeCompetitions = [
     {
@@ -73,17 +71,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
   final List<Map<String, dynamic>> announcements = [
-    {
-      "title": "New competitions launching soon",
-      "competitionType": "ONLINE",
-    },
-    {
-      "title": "Major prizes coming next month",
-      "competitionType": "OFFLINE",
-    },
-    {
-      "title": "Special event announcement",
-    },
+    {"title": "New competitions launching soon", "competitionType": "ONLINE"},
+    {"title": "Major prizes coming next month", "competitionType": "OFFLINE"},
+    {"title": "Special event announcement"},
   ];
 
   @override
@@ -96,8 +86,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18.0),
-            child: Icon(Icons.notifications_active_rounded),
-          )
+            child: InkWell(
+              onTap: (){
+                Get.to(()=>NotificationScreen());
+              },
+                child: Icon(Icons.notifications_active_rounded)),
+          ),
         ],
         title: "dashboard_screen_text".L(),
         showBackButton: false,
@@ -132,10 +126,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _buildHorizontalScrollSection(
                 context: context,
                 items: activeCompetitions,
-                builder: (item) => ActiveCompetitionCard(
-                  competition: item,
-                  isDark: isDark,
-                ),
+                builder: (item) =>
+                    ActiveCompetitionCard(competition: item, isDark: isDark),
               ),
               h3,
               // Upcoming Competitions Section
@@ -148,10 +140,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _buildHorizontalScrollSection(
                 context: context,
                 items: upcomingCompetitions,
-                builder: (item) => UpcomingCompetitionCard(
-                  competition: item,
-                  isDark: isDark,
-                ),
+                builder: (item) =>
+                    UpcomingCompetitionCard(competition: item, isDark: isDark),
               ),
               h3,
               // Announcements Section
@@ -164,10 +154,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _buildHorizontalScrollSection(
                 context: context,
                 items: announcements,
-                builder: (item) => AnnouncementCard(
-                  announcement: item,
-                  isDark: isDark,
-                ),
+                builder: (item) =>
+                    AnnouncementCard(announcement: item, isDark: isDark),
               ),
               h3,
             ],
@@ -178,7 +166,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   /// Builds a section heading widget with "View All" button
-  Widget _buildSectionHeading(String title, bool isDark, VoidCallback? onViewAll) {
+  Widget _buildSectionHeading(
+    String title,
+    bool isDark,
+    VoidCallback? onViewAll,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -187,7 +179,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           style: R.textStyles.poppins(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
-            color: isDark ? R.appColors.darkTextPrimary : R.appColors.textPrimary,
+            color: isDark
+                ? R.appColors.darkTextPrimary
+                : R.appColors.textPrimary,
           ),
         ),
         if (onViewAll != null)
@@ -214,7 +208,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     required Widget Function(T) builder,
   }) {
     final cardWidth = MediaQuery.of(context).size.width * 0.8;
-    
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const ClampingScrollPhysics(),
@@ -223,13 +217,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: List.generate(
           items.length,
           (index) => Padding(
-            padding: EdgeInsets.only(
-              right: index < items.length - 1 ? 12 : 0,
-            ),
-            child: SizedBox(
-              width: cardWidth,
-              child: builder(items[index]),
-            ),
+            padding: EdgeInsets.only(right: index < items.length - 1 ? 12 : 0),
+            child: SizedBox(width: cardWidth, child: builder(items[index])),
           ),
         ),
       ),

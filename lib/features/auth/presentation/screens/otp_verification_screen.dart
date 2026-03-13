@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
-import 'package:unio_fit/features/auth/presentation/screens/registration_screen.dart';
 import 'package:unio_fit/features/base_view/presentation/screens/dashboard_screen.dart';
-
 import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/app_validator.dart';
 import '../../../../core/resources/localization/localization_map.dart';
@@ -146,7 +143,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           ? R.appColors.primary
                           : R.appColors.white,
                       onPressed: () => _onVerifyOTP(),
-                      title: 'verify',
+                      title: 'verify_lbl'.L(),
                     ),
                     h4,
                     if (remainingTime == 0)
@@ -273,7 +270,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           image: R.appImages.accountCreatedImage,
           title: 'account_created',
           subtitle: 'account_created_success',
-          buttonTitle: 'home',
+          buttonTitle: 'home_lbl'.L(),
           onPressed: () =>
               Get.offAllNamed(DashboardScreen.route),
               // Get.offAllNamed(CompleteProfileBaseView.route),
