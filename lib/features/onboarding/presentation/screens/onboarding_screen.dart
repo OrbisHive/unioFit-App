@@ -7,11 +7,9 @@ import '../../../../core/utils/app_button.dart';
 class OnboardingScreen extends StatefulWidget {
   static String route = '/onboarding';
   const OnboardingScreen({super.key});
-
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
-
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;

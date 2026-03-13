@@ -15,22 +15,18 @@ import 'widgets/active_competition_card.dart';
 import 'widgets/upcoming_competition_card.dart';
 import 'widgets/announcement_card.dart';
 import 'widgets/empty_dashboard_state.dart';
-
 /// Dashboard screen - US-005 Dashboard Load
 /// Frontend only implementation with mock/static data
 class DashboardScreen extends StatefulWidget {
   static String route = '/dashboard';
   final ZoomDrawerController? drawerController;
-
   const DashboardScreen({
     super.key,
     this.drawerController,
   });
-
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
-
 class _DashboardScreenState extends State<DashboardScreen> {
   // Mock data - will be replaced with real data later
   final String _userName = "Umair";
@@ -97,6 +93,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Icon(Icons.notifications_active_rounded),
+          )
+        ],
         title: "dashboard_screen_text".L(),
         showBackButton: false,
         showMenuIcon: widget.drawerController != null,

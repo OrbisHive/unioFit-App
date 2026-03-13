@@ -14,7 +14,6 @@ import 'otp_verification_screen.dart';
 class RegistrationScreen extends StatefulWidget {
   static String route = '/registration';
   final String? preFilledPhoneNumber;
-
   const RegistrationScreen({super.key, this.preFilledPhoneNumber});
 
   @override

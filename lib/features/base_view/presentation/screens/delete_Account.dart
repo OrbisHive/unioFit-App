@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:unio_fit/core/constants/heights_widths.dart';
-
 import '../../../../core/resources/resources.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
@@ -34,28 +32,24 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Top Icon
-              Image.asset(
-                R.appImages.errorIcon, // <- apka logout icon asset
-                height: 80,color: R.appColors.primary,
-              ),
-             h2,
-
+              Icon(Icons.delete, color: Colors.white, size: 50),
+              h2,
               // Title
               Text(
                 "Delete Account",
                 style: R.textStyles.poppins(
-                  color: R.appColors.black,
+                  color: R.appColors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                 ),
                 textAlign: TextAlign.center,
               ),
-       h2,
+              h2,
               // Subtitle
               Text(
                 "Are you sure you want to Delete Account?",
                 style: R.textStyles.poppins(
-                  color: R.appColors.black,
+                  color: R.appColors.white,
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                 ),
@@ -76,7 +70,9 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   onPressed: () {
                     Navigator.pop(context); // close dialog
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Account has been  Deleted")),
+                      const SnackBar(
+                        content: Text("Account has been  Deleted"),
+                      ),
                     );
                   },
                   child: Text(
@@ -89,7 +85,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   ),
                 ),
               ),
-           h2,
+              h2,
               // Cancel button
               SizedBox(
                 width: double.infinity,
@@ -105,7 +101,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   child: Text(
                     "Not now",
                     style: R.textStyles.poppins(
-                      color: R.appColors.black,
+                      color: R.appColors.white,
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                     ),
@@ -122,8 +118,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: R.appColors.primary,
-      appBar:  AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         toolbarHeight: 70,
         title: Text(
@@ -131,68 +126,72 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           style: R.textStyles.poppins(
             color: R.appColors.black,
             fontWeight: FontWeight.w600,
-            fontSize: 19,
+            fontSize: 18.sp,
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16)+EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.all(16) + EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Dropdown
             Text(
-                "Reason for deleting your account",
+              "Reason for deleting your account",
+              style: R.textStyles.poppins(
+                color: R.appColors.black,
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            h2,
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                border: InputBorder.none, // ✅ remove extra border
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 14,
+                ),
+              ),
+              value: selectedReason,
+              hint: Text(
+                "Select a reason",
                 style: R.textStyles.poppins(
-                    color: R.appColors.black,fontSize: 15.sp,
-                    fontWeight: FontWeight.bold
-                )
-            ),
-           h2,
-            Container(
-              height: 55,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: R.appColors.greyColor,
-                  width: 1,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
                 ),
-                borderRadius: BorderRadius.circular(12),
               ),
-              alignment: Alignment.center,
-              child: DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  border: InputBorder.none, // ✅ remove extra border
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                ),
-                value: selectedReason,
-                hint: const Text("Select a reason"),
-                items: reasons
-                    .map(
-                      (reason) => DropdownMenuItem<String>(
-                    value: reason,
-                    child: Text(reason),
-                  ),
-                )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedReason = value;
-                  });
-                },
-              ),
+              items: reasons
+                  .map(
+                    (reason) => DropdownMenuItem<String>(
+                      value: reason,
+                      child: Text(
+                        reason,
+                        style: R.textStyles.poppins(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedReason = value;
+                });
+              },
             ),
-           h2,
+            h2,
             // Delete Profile section
             Text(
-                "Delete Profile",
-                style: R.textStyles.poppins(
-                    color: R.appColors.black,fontSize: 17.sp,
-                    fontWeight: FontWeight.bold
-                )
+              "Delete Profile",
+              style: R.textStyles.poppins(
+                color: R.appColors.black,
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-         h2,
+            h2,
             const DeleteInfoPoint(
               text: "All your personal data will be permanently removed.",
             ),
@@ -207,11 +206,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               text: "Access to your connections and messages will be lost.",
             ),
             const DeleteInfoPoint(
-              text: "Any ongoing participation or subscriptions will be canceled.",
+              text:
+                  "Any ongoing participation or subscriptions will be canceled.",
             ),
             const DeleteInfoPoint(
               text:
-              "Your account will be permanently deleted in the next 14 days. "
+                  "Your account will be permanently deleted in the next 14 days. "
                   "You may reactivate your profile by logging in during this time period.",
             ),
             const Spacer(),
@@ -235,7 +235,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 ),
               ),
             ),
-      h7,
+            h7,
           ],
         ),
       ),
@@ -247,11 +247,7 @@ class DeleteInfoPoint extends StatelessWidget {
   final String text;
   final bool bold;
 
-  const DeleteInfoPoint({
-    super.key,
-    required this.text,
-    this.bold = false,
-  });
+  const DeleteInfoPoint({super.key, required this.text, this.bold = false});
 
   @override
   Widget build(BuildContext context) {
@@ -263,11 +259,12 @@ class DeleteInfoPoint extends StatelessWidget {
           const Text("•  ", style: TextStyle(fontSize: 16)),
           Expanded(
             child: Text(
-                text,
-                style: R.textStyles.poppins(
-                    color: R.appColors.greyColor,fontSize: 15.sp,
-                    fontWeight: FontWeight.normal
-                )
+              text,
+              style: R.textStyles.poppins(
+                color: R.appColors.primary,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
         ],
