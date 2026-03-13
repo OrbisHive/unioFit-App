@@ -46,31 +46,35 @@ class CompetitionHeaderWidget extends StatelessWidget {
         ),
         h2,
         // Title and Badges Row
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                competition["title"] as String? ?? "",
-                style: R.textStyles.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? R.appColors.darkTextPrimary
-                      : R.appColors.textPrimary,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4.w, ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  competition["title"] as String? ?? "",
+                  style: R.textStyles.poppins(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDark
+                        ?
+                    R.appColors.darkTextPrimary
+                        : R.appColors.textPrimary,
+                  ),
                 ),
               ),
-            ),
-            w2,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                _buildBadge(type, _getTypeColor(type), isDark),
-                SizedBox(height: 8.px),
-                _buildBadge(status, _getStatusColor(status), isDark),
-              ],
-            ),
-          ],
+              w2,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  _buildBadge(type, _getTypeColor(type), isDark),
+                  SizedBox(height: 8.px),
+                  _buildBadge(status, _getStatusColor(status), isDark),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

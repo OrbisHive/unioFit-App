@@ -192,68 +192,73 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
         showBackButton: true,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Competition Header
             CompetitionHeaderWidget(
               competition: competition,
               isDark: isDark,
             ),
-            h4,
-            // Competition Info
-            CompetitionInfoWidget(
-              competition: competition,
-              isDark: isDark,
-            ),
-            h4,
-            // Competition Description
-            CompetitionDescriptionWidget(
-              description: competition["description"] as String? ?? 
-                  "Transform your body and win exciting cash prizes. Submit your transformation photos before the deadline.",
-              isDark: isDark,
-            ),
-            h4,
-            // Rules & Requirements
-            CompetitionRulesWidget(
-              rules: competition["rules"] as List<String>? ?? [],
-              isDark: isDark,
-            ),
-            h4,
-            // Prize Information
-            CompetitionPrizeWidget(
-              competition: competition,
-              isDark: isDark,
-            ),
-            h4,
-            // Status Timeline (if enrolled)
-            if (isUserEnrolled)
-              CompetitionStatusTimelineWidget(
-                status: competitionStatus,
-                hasSubmitted: hasSubmitted,
-                isDark: isDark,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Competition Info
+                  CompetitionInfoWidget(
+                    competition: competition,
+                    isDark: isDark,
+                  ),
+                  h4,
+                  // Competition Description
+                  CompetitionDescriptionWidget(
+                    description: competition["description"] as String? ??
+                        "Transform your body and win exciting cash prizes. Submit your transformation photos before the deadline.",
+                    isDark: isDark,
+                  ),
+                  h4,
+                  // Rules & Requirements
+                  CompetitionRulesWidget(
+                    rules: competition["rules"] as List<String>? ?? [],
+                    isDark: isDark,
+                  ),
+                  h4,
+                  // Prize Information
+                  CompetitionPrizeWidget(
+                    competition: competition,
+                    isDark: isDark,
+                  ),
+                  h4,
+                  // Status Timeline (if enrolled)
+                  if (isUserEnrolled)
+                    CompetitionStatusTimelineWidget(
+                      status: competitionStatus,
+                      hasSubmitted: hasSubmitted,
+                      isDark: isDark,
+                    ),
+                  if (isUserEnrolled) h4,
+                  // Judging State Message
+                  if (competitionStatus == "JUDGING")
+                    _buildJudgingMessage(isDark),
+                  if (competitionStatus == "JUDGING") h4,
+                  // Winner Announced State
+                  if (competitionStatus == "ANNOUNCED")
+                    _buildWinnerCard(isDark),
+                  if (competitionStatus == "ANNOUNCED") h4,
+                  // Action Section
+                  CompetitionActionSection(
+                    competitionStatus: competitionStatus,
+                    competitionType: competitionType,
+                    isUserEnrolled: isUserEnrolled,
+                    hasSubmitted: hasSubmitted,
+                    onEnroll: _handleEnroll,
+                    onCheckIn: _handleCheckIn,
+                    isDark: isDark,
+                  ),
+                  h3,
+                ],
               ),
-            if (isUserEnrolled) h4,
-            // Judging State Message
-            if (competitionStatus == "JUDGING")
-              _buildJudgingMessage(isDark),
-            if (competitionStatus == "JUDGING") h4,
-            // Winner Announced State
-            if (competitionStatus == "ANNOUNCED")
-              _buildWinnerCard(isDark),
-            if (competitionStatus == "ANNOUNCED") h4,
-            // Action Section
-            CompetitionActionSection(
-              competitionStatus: competitionStatus,
-              competitionType: competitionType,
-              isUserEnrolled: isUserEnrolled,
-              hasSubmitted: hasSubmitted,
-              onEnroll: _handleEnroll,
-              onCheckIn: _handleCheckIn,
-              isDark: isDark,
             ),
-            h3,
           ],
         ),
       ),
