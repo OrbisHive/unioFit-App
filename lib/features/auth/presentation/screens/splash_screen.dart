@@ -33,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // Use logoLight for light mode, logoDark for dark mode
     final logoPath = isDarkMode ? R.appImages.logoDark : R.appImages.logoLight;
-
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(

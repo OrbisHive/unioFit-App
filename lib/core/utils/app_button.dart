@@ -71,7 +71,7 @@ class _AppButtonState extends State<AppButton> {
           elevation: 0,
           // shadowColor:
           //     WidgetStatePropertyAll(R.appColors.black.withOpacity(0.8)),
-          // backgroundColor: widget.backgroundColor ?? ,
+          backgroundColor: widget.backgroundColor ?? R.appColors.transparent,
         ),
         child: widget.iconWidget != null
             ? Row(

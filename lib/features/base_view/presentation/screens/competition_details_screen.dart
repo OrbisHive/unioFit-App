@@ -5,6 +5,7 @@ import '../../../../core/constants/heights_widths.dart';
 import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/utils/custom_app_bar.dart';
+import 'widgets/confirmation_bottom_sheet.dart';
 import 'widgets/dashboard_widget_helpers.dart';
 import 'widgets/competition_details/competition_header_widget.dart';
 import 'widgets/competition_details/competition_info_widget.dart';
@@ -91,93 +92,47 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
   }
 
   void _handleEnroll() {
-    showDialog(
+    ConfirmationBottomSheet.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "enroll_confirmation".L(),
-          style: R.textStyles.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+      title: "enroll_confirmation".L(),
+      subtitle: "Are you ready to join this competition and start your fitness journey?",
+      icon: Icons.local_fire_department,
+      iconColor: R.appColors.error,
+      confirmText: "Enroll Now",
+      cancelText: "Cancel",
+      confirmButtonColor: R.appColors.primary,
+      onConfirm: () {
+        setState(() {
+          isUserEnrolled = true;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("enrollment_success".L()),
+            backgroundColor: R.appColors.success,
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              "Cancel",
-              style: R.textStyles.poppins(
-                color: R.appColors.textSecondary,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              setState(() {
-                isUserEnrolled = true;
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("enrollment_success".L()),
-                  backgroundColor: R.appColors.success,
-                ),
-              );
-            },
-            child: Text(
-              "Confirm",
-              style: R.textStyles.poppins(
-                color: R.appColors.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   void _handleCheckIn() {
-    showDialog(
+    ConfirmationBottomSheet.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "check_in_confirmation".L(),
-          style: R.textStyles.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+      title: "check_in_confirmation".L(),
+      subtitle: "Confirm your check-in at the selected gym location.",
+      icon: Icons.location_on,
+      iconColor: R.appColors.success,
+      confirmText: "Check In",
+      cancelText: "Cancel",
+      confirmButtonColor: R.appColors.primary,
+      onConfirm: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("check_in_success".L()),
+            backgroundColor: R.appColors.success,
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              "Cancel",
-              style: R.textStyles.poppins(
-                color: R.appColors.textSecondary,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("check_in_success".L()),
-                  backgroundColor: R.appColors.success,
-                ),
-              );
-            },
-            child: Text(
-              "Confirm",
-              style: R.textStyles.poppins(
-                color: R.appColors.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
