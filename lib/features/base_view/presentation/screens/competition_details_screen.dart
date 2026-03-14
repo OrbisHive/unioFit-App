@@ -44,6 +44,9 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
   // Mock submission status
   bool hasSubmitted = false;
 
+  // Scroll controller for auto-scrolling
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +66,25 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
     competitionType = competition["type"] as String? ?? "ONLINE";
     isUserEnrolled = competition["isEnrolled"] as bool? ?? false;
     hasSubmitted = competition["hasSubmitted"] as bool? ?? false;
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToBottom() {
+    // Use post frame callback to ensure UI has updated
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 
   Map<String, dynamic> _getDefaultCompetition() {
@@ -111,6 +133,8 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
             backgroundColor: R.appColors.success,
           ),
         );
+        // Auto-scroll to bottom after enrollment
+        _scrollToBottom();
       },
     );
   }
@@ -147,6 +171,7 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
         showBackButton: true,
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             // Competition Header
@@ -164,26 +189,26 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
                     competition: competition,
                     isDark: isDark,
                   ),
-                  h4,
+                  h2,
                   // Competition Description
                   CompetitionDescriptionWidget(
                     description: competition["description"] as String? ??
                         "Transform your body and win exciting cash prizes. Submit your transformation photos before the deadline.",
                     isDark: isDark,
                   ),
-                  h4,
+                  h2,
                   // Rules & Requirements
                   CompetitionRulesWidget(
                     rules: competition["rules"] as List<String>? ?? [],
                     isDark: isDark,
                   ),
-                  h4,
+                  h2,
                   // Prize Information
                   CompetitionPrizeWidget(
                     competition: competition,
                     isDark: isDark,
                   ),
-                  h4,
+                  h2,
                   // Status Timeline (if enrolled)
                   if (isUserEnrolled)
                     CompetitionStatusTimelineWidget(

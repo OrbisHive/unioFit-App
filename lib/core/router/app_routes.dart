@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unio_fit/features/base_view/presentation/screens/base_view.dart';
+
 import '../../features/auth/presentation/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/screens/registration_screen.dart';
 import '../../features/auth/presentation/screens/splash_screen.dart';
@@ -10,8 +11,9 @@ import '../../features/base_view/presentation/screens/announcements_view_all_scr
 import '../../features/base_view/presentation/screens/competition_details_screen.dart';
 import '../../features/base_view/presentation/screens/dashboard_screen.dart';
 import '../../features/base_view/presentation/screens/upcoming_competitions_view_all_screen.dart';
-import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/base_view/presentation/screens/video_trimmer_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../../core/utils/custom_video_player.dart';
 
 /// Application routes configuration using GetX.
 /// Centralizes all route definitions and navigation logic.
@@ -58,12 +60,6 @@ abstract class AppRoutes {
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
-      name: HomeScreen.route,
-      page: () => const HomeScreen(),
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 300),
-    ),
-    GetPage(
       name: TermsAndPolicyView.route,
       page: () => const TermsAndPolicyView(),
       transition: Transition.fadeIn,
@@ -91,6 +87,24 @@ abstract class AppRoutes {
       name: CompetitionDetailsScreen.route,
       page: () => const CompetitionDetailsScreen(),
       transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: VideoTrimmerScreen.route,
+      page: () => const VideoTrimmerScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: CustomVideoPlayer.route,
+      page: () {
+        final args = Get.arguments as Map<String, dynamic>?;
+        return CustomVideoPlayer(
+          videoUrl: args?['videoUrl'] as String?,
+          isShowControls: args?['isShowControls'] as bool? ?? true,
+        );
+      },
+      transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 300),
     ),
   ];

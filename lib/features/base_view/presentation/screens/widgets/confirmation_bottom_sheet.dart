@@ -5,7 +5,6 @@ import '../../../../../core/constants/heights_widths.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/utils/app_button.dart';
 
-
 /// Confirmation Bottom Sheet Widget
 /// Displays an attractive bottom sheet with title, subtitle, icon, and action buttons
 class ConfirmationBottomSheet extends StatelessWidget {
@@ -111,8 +110,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
             width: 80.px,
             height: 80.px,
             decoration: BoxDecoration(
-              color: (iconColor ?? R.appColors.primary)
-                  .withValues(alpha: 0.15),
+              color: (iconColor ?? R.appColors.primary).withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(

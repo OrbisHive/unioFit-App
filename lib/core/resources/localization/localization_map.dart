@@ -186,7 +186,7 @@ class LocalizationMap {
     "enroll_confirmation": "Are you sure you want to enroll in this competition?",
     "enrollment_success": "You are successfully enrolled!",
     "submit_entry": "Submit Entry",
-    "upload_photo": "Upload Transformation Photo",
+    "upload_photo": "Upload Transformation Media",
     "add_description": "Add Description",
     "submit_entry_button": "Submit Entry",
     "submission_success": "Your entry has been submitted successfully!",
@@ -203,6 +203,34 @@ class LocalizationMap {
     "winner_announced_title": "Winner Announced",
     "winner": "Winner",
     "congratulations": "Congratulations!",
+    
+    // Media Picker
+    "choose_media_source": "Choose Media Source",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "select_media_type": "Select Media Type",
+    "photo": "Photo",
+    "video": "Video",
+    
+    // Permissions
+    "camera_permission_required": "Camera permission is required to take photos or videos.",
+    "storage_permission_required": "Storage permission is required to access your gallery.",
+    "permission_denied": "Permission Denied",
+    "permission_denied_message": "Please grant the required permission in your device settings to continue.",
+    "open_settings": "Open Settings",
+    "cancel": "Cancel",
+    
+    // Video Trimmer
+    "video_too_long": "Video must be less than 30 seconds. Please trim your video.",
+    "trim_video": "Trim Video",
+    "trim": "Trim",
+    "save": "Save",
+    "failed_to_load_video": "Failed to load video",
+    "uploading_entry": "Uploading Entry...",
+    "entry_submitted_mock": "Entry submitted (mock)",
+    "video_duration_exceeded": "Video duration exceeded",
+    "select_video_to_trim": "Select video to trim",
+    "max_duration": "Maximum duration: 60 seconds",
   };
 
   static String getValues(String key) {

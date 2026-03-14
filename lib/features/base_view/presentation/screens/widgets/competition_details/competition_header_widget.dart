@@ -42,37 +42,33 @@ class CompetitionHeaderWidget extends StatelessWidget {
           //       ? R.appColors.darkTextSecondary
           //       : R.appColors.textSecondary,
           // ),
-          child: Image.asset(R.appImages.gymReward,fit: BoxFit.cover,),
+          child: Image.asset(R.appImages.gymReward, fit: BoxFit.cover),
         ),
         h2,
         // Title and Badges Row
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, ),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Text(
                   competition["title"] as String? ?? "",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: R.textStyles.poppins(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: isDark
-                        ?
-                    R.appColors.darkTextPrimary
+                        ? R.appColors.darkTextPrimary
                         : R.appColors.textPrimary,
                   ),
                 ),
               ),
               w2,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  _buildBadge(type, _getTypeColor(type), isDark),
-                  SizedBox(height: 8.px),
-                  _buildBadge(status, _getStatusColor(status), isDark),
-                ],
-              ),
+              _buildBadge(type, _getTypeColor(type), isDark),
+              w1,
+              _buildBadge(status, _getStatusColor(status), isDark),
             ],
           ),
         ),
@@ -82,19 +78,16 @@ class CompetitionHeaderWidget extends StatelessWidget {
 
   Widget _buildBadge(String text, Color color, bool isDark) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.px, vertical: 6.px),
+      padding: EdgeInsets.symmetric(horizontal: 10.px, vertical: 6.px),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: color,
-          width: 1.5,
-        ),
+        border: Border.all(color: color, width: 1.5),
       ),
       child: Text(
         text.toLowerCase().L(),
         style: R.textStyles.poppins(
-          fontSize: 12,
+          fontSize: 12.sp,
           fontWeight: FontWeight.w700,
           color: color,
         ),
@@ -128,4 +121,3 @@ class CompetitionHeaderWidget extends StatelessWidget {
     }
   }
 }
-

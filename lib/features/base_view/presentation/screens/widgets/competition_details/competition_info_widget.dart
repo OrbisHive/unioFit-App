@@ -22,35 +22,52 @@ class CompetitionInfoWidget extends StatelessWidget {
     return DashboardWidgetHelpers.cardContainer(
       isDark: isDark,
       padding: EdgeInsets.all(4.w),
-      child: Column(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInfoRow(
-            icon: Icons.calendar_today,
-            label: "start_date".L(),
-            value: competition["startDate"] as String? ?? "N/A",
-            isDark: isDark,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildInfoRow(
+                  icon: Icons.calendar_today,
+                  label: "start_date".L(),
+                  value: competition["startDate"] as String? ?? "N/A",
+                  isDark: isDark,
+                ),
+                h2,
+                _buildInfoRow(
+                  icon: Icons.event,
+                  label: "end_date".L(),
+                  value: competition["endDate"] as String? ?? "N/A",
+                  isDark: isDark,
+                ),
+                h2,
+              ],
+            ),
           ),
-          h2,
-          _buildInfoRow(
-            icon: Icons.event,
-            label: "end_date".L(),
-            value: competition["endDate"] as String? ?? "N/A",
-            isDark: isDark,
-          ),
-          h2,
-          _buildInfoRow(
-            icon: Icons.people,
-            label: "participants_count".L(),
-            value: "${competition["participants"] ?? 0}",
-            isDark: isDark,
-          ),
-          h2,
-          _buildInfoRow(
-            icon: Icons.emoji_events,
-            label: "prize_amount".L(),
-            value: competition["prize"] as String? ?? "N/A",
-            isDark: isDark,
-            valueColor: R.appColors.warning,
+          Spacer(),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildInfoRow(
+                  icon: Icons.people,
+                  label: "participants_count".L(),
+                  value: "${competition["participants"] ?? 0}",
+                  isDark: isDark,
+                ),
+                h2,
+                _buildInfoRow(
+                  icon: Icons.emoji_events,
+                  label: "prize_amount".L(),
+                  value: competition["prize"] as String? ?? "N/A",
+                  isDark: isDark,
+                  valueColor: R.appColors.warning,
+                ),
+                h2,
+              ],
+            ),
           ),
         ],
       ),
@@ -81,7 +98,7 @@ class CompetitionInfoWidget extends StatelessWidget {
               Text(
                 label,
                 style: R.textStyles.poppins(
-                  fontSize: 12,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   color: isDark
                       ? R.appColors.darkTextSecondary
@@ -92,7 +109,7 @@ class CompetitionInfoWidget extends StatelessWidget {
               Text(
                 value,
                 style: R.textStyles.poppins(
-                  fontSize: 16,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: valueColor ??
                       (isDark
