@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:unio_fit/core/constants/heights_widths.dart';
+import 'package:unio_fit/core/resources/localization/localization_map.dart';
+import 'package:unio_fit/core/utils/custom_app_bar.dart';
 import '../../../../core/resources/resources.dart';
 import 'delete_Account.dart';
-
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -27,14 +28,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Settings",
-          style: R.textStyles.poppins(
-            fontSize: 17.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: "Settings-lbl".L(),
       ),
 
       body: ListView(
@@ -44,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           /// Notifications
           Text(
-            "Notifications",
+            "Notification_title".L(),
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold),
@@ -53,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             value: comp,
             title: Text(
-              "Competition Updates",
+              "Competition_Updates".L(),
               style: R.textStyles.poppins(
                 fontSize: 15.5.sp,
                 fontWeight: FontWeight.w500,
@@ -66,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             value: announce,
             title: Text(
-              "Announcements",
+              "Announcements_lbl".L(),
               style: R.textStyles.poppins(
                 fontSize: 15.5.sp,
                 fontWeight: FontWeight.w500,
@@ -79,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             value: winners,
             title: Text(
-              "Winner Notifications",
+              "Winner_Notifications".L(),
               style: R.textStyles.poppins(
                 fontSize: 15.5.sp,
                 fontWeight: FontWeight.w500,
@@ -93,7 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           /// Theme Settings
           Text(
-            "Appearance",
+            "Appearance_lbl".L(),
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold),
@@ -102,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile(
             value: isDarkMode,
             title: Text(
-              "Dark Mode",
+              "Dark_Mode".L(),
               style: R.textStyles.poppins(
                 fontSize: 15.5.sp,
                 fontWeight: FontWeight.w500,
@@ -128,7 +123,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           /// Account
           Text(
-            "Account Setting",
+            "Account_Setting".L(),
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold),
@@ -136,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           h1,
 
-          _tile("Delete Account", isDark),
+          _tile("Delete_Account".L(), isDark),
 
         ],
       ),

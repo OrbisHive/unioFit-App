@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../core/resources/localization/localization_map.dart';
 import '../../../../core/resources/resources.dart';
 class SupportChatScreen extends StatefulWidget {
   const SupportChatScreen({super.key});
@@ -10,9 +11,9 @@ class SupportChatScreen extends StatefulWidget {
 class _SupportChatScreenState extends State<SupportChatScreen> {
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  List<Map<String, dynamic>> messages = [
+  late final List<Map<String, dynamic>> messages = [
     {
-      "message": "Hello! How can we help you today?",
+      "message": "support_greeting_message".L(),
       "isUser": false,
       "time": "10:00 AM"
     }
@@ -66,7 +67,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
               children: [
 
                 Text(
-                  "Support Chat",
+                  "support_chat".L(),
                   style: R.textStyles.poppins(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
@@ -77,7 +78,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                 ),
 
                 Text(
-                  "Online",
+                  "support_online".L(),
                   style: R.textStyles.poppins(
                     fontSize: 11.sp,
                     color: Colors.green,
@@ -190,7 +191,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                         color: const Color(0xFF1A1A1A), // text color
                       ),
                       decoration: InputDecoration(
-                        hintText: "Type a message...",
+                        hintText: "type_a_message".L(),
                         hintStyle: R.textStyles.poppins(
                           fontSize: 15.sp,
                           color: const Color(0xFF1A1A1A).withOpacity(0.6),

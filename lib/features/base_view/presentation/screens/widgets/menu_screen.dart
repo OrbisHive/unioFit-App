@@ -95,7 +95,7 @@ class MenuScreen extends StatelessWidget {
             h3,
             // Menu Items
             Padding(
-              padding: EdgeInsets.only(right: Get.width*0.5),
+              padding: EdgeInsets.only(right: Get.width*0.5,left: Get.width*0.022),
               child: Column(
                 children: [
                   _buildMenuItem(
@@ -156,7 +156,7 @@ class MenuScreen extends StatelessWidget {
                   _buildMenuItem(
                     context: context,
                     icon: Icons.help_outline,
-                    title: "Help & Support",
+                    title: "help_and_support".L(),
                     isDark: isDark,
                     onTap: () {
                       // drawerController?.close?.call();
@@ -238,6 +238,7 @@ class MenuScreen extends StatelessWidget {
                 ),
               ),
             ),
+           w1,
            if(showIcon==true) Icon(
               Icons.chevron_right,
               color: isDark
