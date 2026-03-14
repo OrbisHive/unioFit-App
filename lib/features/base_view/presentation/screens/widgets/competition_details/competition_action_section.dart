@@ -17,6 +17,7 @@ class CompetitionActionSection extends StatelessWidget {
   final bool hasSubmitted;
   final VoidCallback? onEnroll;
   final VoidCallback? onCheckIn;
+  final VoidCallback? onSubmissionSuccess;
   final bool isDark;
 
   const CompetitionActionSection({
@@ -27,6 +28,7 @@ class CompetitionActionSection extends StatelessWidget {
     required this.hasSubmitted,
     this.onEnroll,
     this.onCheckIn,
+    this.onSubmissionSuccess,
     required this.isDark,
   });
 
@@ -42,12 +44,11 @@ class CompetitionActionSection extends StatelessWidget {
     }
 
     // If enrolled and ONLINE competition
-    if (isUserEnrolled && competitionType == "ONLINE" && !hasSubmitted) {
+    if (isUserEnrolled && competitionType == "ONLINE") {
       return CompetitionSubmissionSection(
         isDark: isDark,
-        onSubmissionSuccess: () {
-          // Handle submission success
-        },
+        hasSubmitted: hasSubmitted,
+        onSubmissionSuccess: onSubmissionSuccess ?? () {},
       );
     }
 

@@ -12,16 +12,19 @@ import '../../../../../../core/utils/app_button.dart';
 import '../../video_trimmer_screen.dart';
 import '../dashboard_widget_helpers.dart';
 import '../media_preview_widget.dart';
+import 'submitted_entry_widget.dart';
 
 /// Competition Submission Section
 /// Handles online competition submission
 class CompetitionSubmissionSection extends StatefulWidget {
   final bool isDark;
+  final bool hasSubmitted;
   final VoidCallback? onSubmissionSuccess;
 
   const CompetitionSubmissionSection({
     super.key,
     required this.isDark,
+    this.hasSubmitted = false,
     this.onSubmissionSuccess,
   });
 
@@ -40,6 +43,24 @@ class _CompetitionSubmissionSectionState
   bool _isVideo = false;
   bool _isUploading = false;
   double _uploadProgress = 0.0;
+  
+  // Submission status (2 = submitted)
+  int _submissionStatus = 0; // 0 = not submitted, 2 = submitted
+  
+  @override
+  void initState() {
+    super.initState();
+    // If already submitted from parent, set status to 2
+    if (widget.hasSubmitted) {
+      _submissionStatus = 2;
+    }
+  }
+  File? _submittedFile;
+  Uint8List? _submittedThumbnail;
+  bool _submittedIsVideo = false;
+  String _submittedDescription = '';
+  String _submittedFileName = '';
+  String _submittedFileSize = '';
 
   @override
   void dispose() {
@@ -118,6 +139,12 @@ class _CompetitionSubmissionSectionState
     _simulateUpload();
   }
 
+  String _formatFileSize(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+  }
+
   void _simulateUpload() {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted) {
@@ -128,10 +155,22 @@ class _CompetitionSubmissionSectionState
         if (_uploadProgress < 1.0) {
           _simulateUpload();
         } else {
-          setState(() {
-            _isUploading = false;
-            _uploadProgress = 0.0;
-          });
+          // Store submitted data
+          if (_selectedFile != null) {
+            final fileSize = _selectedFile!.lengthSync();
+            setState(() {
+              _isUploading = false;
+              _uploadProgress = 0.0;
+              _submissionStatus = 2; // Status 2 = submitted
+              _submittedFile = _selectedFile;
+              _submittedThumbnail = _videoThumbnail;
+              _submittedIsVideo = _isVideo;
+              _submittedDescription = _descriptionController.text;
+              _submittedFileName = _selectedFile!.path.split('/').last;
+              _submittedFileSize = _formatFileSize(fileSize);
+            });
+          }
+          
           widget.onSubmissionSuccess?.call();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -146,6 +185,20 @@ class _CompetitionSubmissionSectionState
 
   @override
   Widget build(BuildContext context) {
+    // If submitted (status = 2), show submitted entry widget
+    if (_submissionStatus == 2 && _submittedFile != null) {
+      return SubmittedEntryWidget(
+        submittedFile: _submittedFile,
+        thumbnailBytes: _submittedThumbnail,
+        isVideo: _submittedIsVideo,
+        description: _submittedDescription,
+        fileName: _submittedFileName,
+        fileSize: _submittedFileSize,
+        isDark: widget.isDark,
+      );
+    }
+
+    // Show submission form
     return DashboardWidgetHelpers.cardContainer(
       isDark: widget.isDark,
       padding: EdgeInsets.all(4.w),

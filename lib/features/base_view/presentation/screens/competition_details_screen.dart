@@ -139,6 +139,12 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
     );
   }
 
+  void _handleSubmissionSuccess() {
+    setState(() {
+      hasSubmitted = true;
+    });
+  }
+
   void _handleCheckIn() {
     ConfirmationBottomSheet.show(
       context: context,
@@ -233,6 +239,7 @@ class _CompetitionDetailsScreenState extends State<CompetitionDetailsScreen> {
                     hasSubmitted: hasSubmitted,
                     onEnroll: _handleEnroll,
                     onCheckIn: _handleCheckIn,
+                    onSubmissionSuccess: _handleSubmissionSuccess,
                     isDark: isDark,
                   ),
                   h3,
